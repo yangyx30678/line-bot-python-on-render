@@ -45,7 +45,8 @@ def handle_message(event):
             output = random.choice(lines)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=output))
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
+        # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="呵呵"))
 
 
 if __name__ == '__main__':
