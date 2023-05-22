@@ -30,7 +30,12 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 #加入一個handle_message function
 def handle_message(event):
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
+    # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
+    my_text = event.message.text
+    if my_text == "我想吃大餐":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="吃屎吧你"))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
 
 
 if __name__ == '__main__':
