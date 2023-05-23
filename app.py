@@ -34,19 +34,18 @@ import random
 def handle_message(event):
     my_text = event.message.text
     pic_url = ""
+    r = random.Random(30678)
     if my_text == "我想吃大餐":
         pic_index = 0
         with open('feast.txt') as f:
             lines = f.readlines()
-            output = random.choice(lines)
+            output = r.choice(lines)
             for index, x in enumerate(lines):
                 if x == output:
-                    # print(index, x)
                     pic_index = index
         with open('feast_pic.txt') as f:
             url_lines = f.readlines()
             pic_url = url_lines[pic_index]
-        # if pic_index:
         try:
             message = [
                 TextSendMessage(
@@ -62,14 +61,35 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,
                 TextSendMessage(text= '笑死 壞囉'))
     elif my_text == "我想吃小吃":
+        pic_index = 0
         with open('streetfood.txt') as f:
             lines = f.readlines()
-            output = random.choice(lines)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=output))
+            output = r.choice(lines)
+            for index, x in enumerate(lines):
+                if x == output:
+                    pic_index = index
+        with open('streetfood_pic.txt') as f:
+            url_lines = f.readlines()
+            pic_url = url_lines[pic_index]
+        try:
+            message = [
+                TextSendMessage(
+                    text=output
+                    ),
+                ImageSendMessage(
+                original_content_url = pic_url,
+                preview_image_url = pic_url
+                    )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+        except:
+            line_bot_api.reply_message(event.reply_token,
+                TextSendMessage(text= '笑死 壞囉'))
     else:
-        # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text="呵呵"))
 
 
 if __name__ == '__main__':
     app.run(port=8000)
+    # port 8000 for render
+    
