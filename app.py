@@ -43,7 +43,7 @@ def handle_message(event):
                 if x == output:
                     print(index, x)
                     pic_index = index
-        if pic_index == '1':
+        # if pic_index:
             try:
                 message = ImageSendMessage(
                     original_content_url = "https://ithelp.ithome.com.tw/upload/images/20220925/20151681EaMkK6ROvq.jpg",
@@ -52,7 +52,7 @@ def handle_message(event):
                 line_bot_api.reply_message(event.reply_token, message)
             except:
                 line_bot_api.reply_message(event.reply_token,
-                    TextSendMessage(text= 'Sorry~屁桃故障囉！'))
+                    TextSendMessage(text= '笑死 壞囉'))
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=output))
     elif my_text == "我想吃小吃":
         with open('streetfood.txt') as f:
