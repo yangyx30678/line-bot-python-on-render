@@ -45,15 +45,19 @@ def handle_message(event):
                     pic_index = index
         # if pic_index:
             try:
-                message = ImageSendMessage(
+                message = [
+                    TextSendMessage(
+                        text=output
+                        ),
+                    ImageSendMessage(
                     original_content_url = "https://ithelp.ithome.com.tw/upload/images/20220925/20151681EaMkK6ROvq.jpg",
                     preview_image_url = "https://ithelp.ithome.com.tw/upload/images/20220925/20151681EaMkK6ROvq.jpg"
-                )
+                        )
+                ]
                 line_bot_api.reply_message(event.reply_token, message)
             except:
                 line_bot_api.reply_message(event.reply_token,
                     TextSendMessage(text= '笑死 壞囉'))
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=output))
     elif my_text == "我想吃小吃":
         with open('streetfood.txt') as f:
             lines = f.readlines()
