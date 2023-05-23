@@ -38,6 +38,9 @@ def handle_message(event):
         with open('feast.txt') as f:
             lines = f.readlines()
             output = random.choice(lines)
+            for index, x in enumerate(lines):
+                if x == output:
+                    print(index, x)
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=output))
     elif my_text == "我想吃小吃":
         with open('streetfood.txt') as f:
