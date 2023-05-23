@@ -32,8 +32,8 @@ import random
 @handler.add(MessageEvent, message=TextMessage)
 #加入一個handle_message function
 def handle_message(event):
-    # line_bot_api.reply_message(event.reply_token, TextSendMessage(text=event.message.text+"((歪頭((燦笑"))
     my_text = event.message.text
+    pic_url = ""
     if my_text == "我想吃大餐":
         pic_index = 0
         with open('feast.txt') as f:
@@ -41,23 +41,26 @@ def handle_message(event):
             output = random.choice(lines)
             for index, x in enumerate(lines):
                 if x == output:
-                    print(index, x)
+                    # print(index, x)
                     pic_index = index
+        with open('feast_pic.txt') as f:
+            url_lines = f.readlines()
+            pic_url = url_lines[pic_index]
         # if pic_index:
-            try:
-                message = [
-                    TextSendMessage(
-                        text=output
-                        ),
-                    ImageSendMessage(
-                    original_content_url = "https://ithelp.ithome.com.tw/upload/images/20220925/20151681EaMkK6ROvq.jpg",
-                    preview_image_url = "https://ithelp.ithome.com.tw/upload/images/20220925/20151681EaMkK6ROvq.jpg"
-                        )
-                ]
-                line_bot_api.reply_message(event.reply_token, message)
-            except:
-                line_bot_api.reply_message(event.reply_token,
-                    TextSendMessage(text= '笑死 壞囉'))
+        try:
+            message = [
+                TextSendMessage(
+                    text=output
+                    ),
+                ImageSendMessage(
+                original_content_url = pic_url,
+                preview_image_url = pic_url
+                    )
+            ]
+            line_bot_api.reply_message(event.reply_token, message)
+        except:
+            line_bot_api.reply_message(event.reply_token,
+                TextSendMessage(text= '笑死 壞囉'))
     elif my_text == "我想吃小吃":
         with open('streetfood.txt') as f:
             lines = f.readlines()
