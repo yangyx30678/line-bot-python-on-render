@@ -34,12 +34,12 @@ import random
 def handle_message(event):
     my_text = event.message.text
     pic_url = ""
-    r = random.Random(30678)
+    # r = random.Random(30678)
     if my_text == "我想吃大餐":
         pic_index = 0
         with open('feast.txt') as f:
             lines = f.readlines()
-            output = r.choice(lines)
+            output = random.choice(lines)
             for index, x in enumerate(lines):
                 if x == output:
                     pic_index = index
@@ -64,7 +64,7 @@ def handle_message(event):
         pic_index = 0
         with open('streetfood.txt') as f:
             lines = f.readlines()
-            output = r.choice(lines)
+            output = random.choice(lines)
             for index, x in enumerate(lines):
                 if x == output:
                     pic_index = index
